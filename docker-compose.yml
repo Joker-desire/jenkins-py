@@ -1,0 +1,20 @@
+services:
+  jenkins-py:
+    build:
+      context: ./compose
+    container_name: jenkins-py
+    platform: linux/amd64
+    user: root
+    ports:
+      - 7071:8080
+      - 50000:50000
+    volumes:
+      - ./app/:/app/
+      - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins-py
+
+networks:
+  jenkins-py:
+    driver: bridge
